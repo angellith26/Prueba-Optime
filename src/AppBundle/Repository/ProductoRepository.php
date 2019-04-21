@@ -10,5 +10,15 @@ namespace AppBundle\Repository;
  */
 class ProductoRepository extends \Doctrine\ORM\EntityRepository
 {
-	
+	public function findByProductActive()
+	{
+    	$query = $this->getEntityManager()
+    	->createQuery(
+        'SELECT p, c FROM AppBundle:Producto p
+        JOIN p.categoria c
+        WHERE c.status = :status'
+    	)->setParameter('status', true);
+
+    return $query->getResult();
+	}
 }

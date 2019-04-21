@@ -28,10 +28,18 @@ class DefaultController extends Controller
      */
     public function productosAction(Request $request)
     {
+        /*
         $repository = $this->getDoctrine()->getRepository(Producto::class);
         $productos = $repository->findAll();
-        /*var_dump($productos);
-        die();*/
+        */
+
+        $productos = $this->getDoctrine()->getRepository(Producto::class)
+        ->findByProductActive();
+
+        /*
+        var_dump($productos);
+        die();
+        */
 
         // replace this example code with whatever you need
         return $this->render('optime/productos.html.twig',array('productos'=>$productos));
@@ -193,6 +201,7 @@ class DefaultController extends Controller
     public function categoriaEliminar($id)
     {
         $em =$this->getDoctrine()->getManager();
+
         $categoria = $em->getRepository('AppBundle:Categoria')->find($id);
         if (!$categoria) {
             throw $this->createNotFoundException(' La Categoria con ID '.$id.' no existe');

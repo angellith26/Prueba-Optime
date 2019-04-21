@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Producto
@@ -26,6 +27,17 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=10, unique=true)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 10,
+     *      minMessage = "El codigo debe ser mayor a {{ limit }} digitos",
+     *      maxMessage = "El codigo debe ser menor a {{ limit }} digitos"
+     * )
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zA-Z0-9]+$/i",
+     *     htmlPattern = "^[a-zA-Z0-9]+$",
+     *     message="no puede contener caracteres especiales ni espacios."
+     * )
      */
     private $codigo;
 
@@ -33,6 +45,10 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=30, unique=true)
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "El nombre debe ser mayor a {{ limit }} digitos"
+     * )
      */
     private $nombre;
 
@@ -54,6 +70,10 @@ class Producto
      * @var float
      *
      * @ORM\Column(name="precio", type="float")
+     * @Assert\Type(
+     *     type="float",
+     *     message="El valor {{ value }} no es de tipo {{ type }}."
+     * )
      */
     private $precio;
 

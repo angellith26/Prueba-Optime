@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Categoria
@@ -26,6 +27,12 @@ class Categoria
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=10, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zA-Z0-9]+$/i",
+     *     htmlPattern = "^[a-zA-Z0-9]+$",
+     *     message="no puede contener caracteres especiales ni espacios."
+     * )
      */
     private $codigo;
 
@@ -33,6 +40,11 @@ class Categoria
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=30, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "El nombre debe ser mayor a {{ limit }} digitos"
+     * )
      */
     private $nombre;
 
@@ -40,6 +52,7 @@ class Categoria
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank
      */
     private $descripcion;
 

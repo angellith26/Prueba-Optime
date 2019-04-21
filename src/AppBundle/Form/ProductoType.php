@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Entity\Categoria;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class ProductoType extends AbstractType
 {
@@ -22,6 +23,11 @@ class ProductoType extends AbstractType
         ->add('precio', MoneyType::class)
         ->add('categoria', EntityType::class, [
             'class' => 'AppBundle:Categoria',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('c')
+                ->where('c.status = true')
+                ->orderBy('c.nombre', 'ASC');
+            },
             'choice_label' => 'nombre',])
         ->add('save', SubmitType::class, ['label' => 'Crear']);
     }

@@ -30,8 +30,7 @@ Categorias Optime!
 										<td>{{ categoria.codigo }}</td>
 										<td>{{ categoria.nombre }}</td>
 										<td>{{ categoria.descripcion }}</td>
-										<td>{{ categoria.status }}</td>
-										
+										<td>{% if categoria.status == true %} Activo {% else %} Inactivo {% endif %}</td>										
 										<td class="text-center">
 											<a href="{{ path('categoriaVer', {id: categoria.id}) }}" class="btn btn-outline-success btn-sm">Ver</a>
 											<a href="{{ path('categoriaActualizar', {id: categoria.id}) }}" class="btn btn-outline-info btn-sm">Actualizar</a>
