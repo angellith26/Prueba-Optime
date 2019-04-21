@@ -1,0 +1,25 @@
+
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Nueva Categoria!
+
+{% endblock %}
+
+{% block body %}
+<h1 align="left">Nueva Categoria</h1>
+<div class="row">
+	<div class="col-lg-11 col-md-8">
+		<div class="table-responsive">
+			
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				{{ form_end(form) }}
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

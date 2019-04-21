@@ -1,0 +1,49 @@
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Categorias Optime!
+
+{% endblock %}
+{% block body %}
+
+
+<a href="{{ path('categoriaNuevo') }}" class="btn btn-primary">Nueva Categoria</a>
+				<div class="row my-4">
+					<div class="col-lg-11 col-md-8">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th>ID</th>
+										<th>Codigo</th>
+										<th>Nombre</th>
+										<th>Descripcion</th>
+										<th>Status</th>
+										<th class="text-center">Accion</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for categoria in categorias %}
+					        		<tr>
+										<td>{{ categoria.id }}</td>
+										<td>{{ categoria.codigo }}</td>
+										<td>{{ categoria.nombre }}</td>
+										<td>{{ categoria.descripcion }}</td>
+										<td>{{ categoria.status }}</td>
+										
+										<td class="text-center">
+											<a href="{{ path('categoriaVer', {id: categoria.id}) }}" class="btn btn-outline-success btn-sm">Ver</a>
+											<a href="formulario.html" class="btn btn-outline-info btn-sm">Actualizar</a>
+											<a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Eliminar</a>
+										</td>
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+{% endblock %}

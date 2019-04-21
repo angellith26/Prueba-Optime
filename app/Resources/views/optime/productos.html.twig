@@ -1,0 +1,49 @@
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Productos Optime!
+
+{% endblock %}
+{% block body %}
+
+<a href="{{ path('productoNuevo') }}" class="btn btn-primary">Nuevo Producto</a>
+<div class="row my-4">
+	<div class="col-lg-11 col-md-8">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead class="thead-inverse">
+					<tr>
+						<th>ID</th>
+						<th>Codigo</th>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Marca</th>
+						<th>Precio</th>
+						<th class="text-center">Accion</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for producto in productos %}
+				        <tr>
+							<td>{{ producto.id }}</td>
+							<td>{{ producto.codigo }}</td>
+							<td>{{ producto.nombre }}</td>
+							<td>{{ producto.descripcion }}</td>
+							<td>{{ producto.marca }}</td>
+							<td>{{ producto.precio }}</td>
+							<td class="text-center">
+								<a href="{{ path('productoVer', {id: producto.id}) }}" class="btn btn-outline-success btn-sm">Ver</a>
+								<a href="formulario.html" class="btn btn-outline-info btn-sm">Actualizar</a>
+								<a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Eliminar</a
+							</td>
+						</tr>
+	    			{% endfor %}
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

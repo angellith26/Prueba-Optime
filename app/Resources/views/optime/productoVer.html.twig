@@ -1,0 +1,22 @@
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Ver producto!
+
+{% endblock %}
+{% block body %}
+
+<a href="{{ path('productos') }}" class="btn btn-primary">Volver</a>
+				<div class="row my-4">
+					<div class="col-lg-11 col-md-8">
+						<h2>Producto</h2>
+						<p>ID: {{ producto.id }}</p>
+						<p>Codigo: {{ producto.codigo }}</p>
+						<p>Nombre: {{ producto.nombre }}</p>
+						<p>Descripcion: {{ producto.descripcion }}</p>
+						<p>Marca: {{ producto.marca }}</p>
+						<p>Precio: {{ producto.precio }}</p>
+					</div>
+				</div>
+{% endblock %}

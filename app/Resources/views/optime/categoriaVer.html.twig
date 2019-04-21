@@ -1,0 +1,21 @@
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Ver categoria!
+
+{% endblock %}
+{% block body %}
+
+<a href="{{ path('categorias') }}" class="btn btn-primary">Volver</a>
+				<div class="row my-4">
+					<div class="col-lg-11 col-md-8">
+						<h2>Categoria</h2>
+						<p>ID: {{ categoria.id }}</p>
+						<p>Codigo: {{ categoria.codigo }}</p>
+						<p>Nombre: {{ categoria.nombre }}</p>
+						<p>Descripcion: {{ categoria.descripcion }}</p>
+						<p>Status: {{ categoria.status }}</p>
+					</div>
+				</div>
+{% endblock %}
