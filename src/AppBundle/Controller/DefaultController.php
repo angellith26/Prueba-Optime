@@ -9,6 +9,7 @@ use AppBundle\Entity\Producto;
 use AppBundle\Entity\Categoria;
 use AppBundle\Form\CategoriaType;
 use AppBundle\Form\ProductoType;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class DefaultController extends Controller
@@ -29,6 +30,8 @@ class DefaultController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Producto::class);
         $productos = $repository->findAll();
+        /*var_dump($productos);
+        die();*/
 
         // replace this example code with whatever you need
         return $this->render('optime/productos.html.twig',array('productos'=>$productos));
@@ -74,13 +77,42 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/update/categorias/{id}", name="update_categorias")
+     * @Route("/producto/actualizar/{id}", name="productoActualizar")
      */
-    public function updateCategorias(Request $request)
+    public function productoActualizar(Request $request, $id)
     {
+        $producto = new Producto();
+        $em =$this->getDoctrine()->getManager();
+        $producto = $em->getRepository('AppBundle:Producto')->find($id);
+        $form = $this->createForm(ProductoType::class, $producto);    
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('productos');
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('optime/productoActualizar.html.twig',array('form'=>$form->createView()));
     }
 
+        /**
+     * @Route("/producto/eliminar/{id}", name="productoEliminar")
+     */
+    public function productoEliminar($id)
+    {
+        $em =$this->getDoctrine()->getManager();
+        $producto = $em->getRepository('AppBundle:Producto')->find($id);
+        if (!$producto) {
+            throw $this->createNotFoundException(' El producto con ID '.$id.' no existe');
+            
+        }
+        $em->remove($producto);
+        $em->flush();
+
+        return $this->redirectToRoute('productos');
+    }
 
     /**
      * @Route("/categorias", name="categorias")
@@ -132,5 +164,43 @@ class DefaultController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('optime/categoriaNuevo.html.twig',array('form'=>$form->createView()));
+    }
+
+    /**
+     * @Route("/categoria/actualizar/{id}", name="categoriaActualizar")
+     */
+    public function categoriaActualizar(Request $request, $id)
+    {
+        $categoria = new Categoria();
+        $em =$this->getDoctrine()->getManager();
+        $categoria = $em->getRepository('AppBundle:Categoria')->find($id);
+        $form = $this->createForm(CategoriaType::class, $categoria);    
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('categorias');
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('optime/categoriaActualizar.html.twig',array('form'=>$form->createView()));
+    }
+
+    /**
+     * @Route("/categoria/eliminar/{id}", name="categoriaEliminar")
+     */
+    public function categoriaEliminar($id)
+    {
+        $em =$this->getDoctrine()->getManager();
+        $categoria = $em->getRepository('AppBundle:Categoria')->find($id);
+        if (!$categoria) {
+            throw $this->createNotFoundException(' La Categoria con ID '.$id.' no existe');
+            
+        }
+        $em->remove($categoria);
+        $em->flush();
+
+        return $this->redirectToRoute('categorias');
     }
 }

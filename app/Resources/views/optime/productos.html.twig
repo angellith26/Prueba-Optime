@@ -19,6 +19,7 @@ Productos Optime!
 						<th>Nombre</th>
 						<th>Descripcion</th>
 						<th>Marca</th>
+						<th>Categoria</th>
 						<th>Precio</th>
 						<th class="text-center">Accion</th>
 					</tr>
@@ -31,11 +32,14 @@ Productos Optime!
 							<td>{{ producto.nombre }}</td>
 							<td>{{ producto.descripcion }}</td>
 							<td>{{ producto.marca }}</td>
+							<td>{{ producto.categoria.nombre }}</td>
 							<td>{{ producto.precio }}</td>
 							<td class="text-center">
 								<a href="{{ path('productoVer', {id: producto.id}) }}" class="btn btn-outline-success btn-sm">Ver</a>
-								<a href="formulario.html" class="btn btn-outline-info btn-sm">Actualizar</a>
-								<a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Eliminar</a
+
+								<a href="{{ path('productoActualizar', {id: producto.id}) }}" class="btn btn-outline-info btn-sm">Actualizar</a>
+
+								<a href="{{ path('productoEliminar', {id: producto.id}) }}" class="btn btn-outline-danger btn-sm">Eliminar</a
 							</td>
 						</tr>
 	    			{% endfor %}

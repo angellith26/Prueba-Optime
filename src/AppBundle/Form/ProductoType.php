@@ -21,18 +21,9 @@ class ProductoType extends AbstractType
         ->add('marca', TextType::class)
         ->add('precio', MoneyType::class)
         ->add('categoria', EntityType::class, [
-            // looks for choices from this entity
             'class' => 'AppBundle:Categoria',
-
-            // uses the User.username property as the visible option string
-            'choice_label' => 'nombre',
-
-            // used to render a select box, check boxes or radios
-            // 'multiple' => true,
-            // 'expanded' => true,
-        ])
+            'choice_label' => 'nombre',])
         ->add('save', SubmitType::class, ['label' => 'Crear']);
-        
     }
 }
 

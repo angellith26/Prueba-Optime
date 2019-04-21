@@ -1,0 +1,21 @@
+{# plantilla de la aplicacion #}
+{% extends 'base.html.twig' %}
+{% block title %}
+
+Actualizar Producto!
+
+{% endblock %}
+
+{% block body %}
+<h1 align="left">Actualizar Producto</h1>
+<a href="{{ path('productos') }}" class="btn btn-primary">Volver</a>
+<div class="row my-4">
+	<div class="col-lg-11 col-md-8">
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>
+</div>
+
+
+{% endblock %}
